@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brooklyn Pearl Resort — Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8cc82;
+            --gold-pale: #f5e9c8;
+            --cream: #faf6ee;
+            --ink: #1a1208;
+            --bark: #2e1f0e;
+            --forest: #0d2616;
+            --moss: #1a3d1f;
+            --parchment: #f0e6cc;
+            --warm-white: #fffdf7;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'EB Garamond', Georgia, serif;
+            background: var(--forest);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Textured background */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.04) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* COVER HEADER */
+        .cover {
+            text-align: center;
+            padding: 60px 40px 50px;
+            position: relative;
+        }
+
+        .cover::before, .cover::after {
+            content: '';
+            display: block;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 20px auto;
+            width: 80%;
+        }
+
+        .resort-name {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(28px, 6vw, 52px);
+            font-weight: 700;
+            letter-spacing: 6px;
+            color: var(--gold-light);
+            text-shadow: 0 0 40px rgba(201,168,76,0.3);
+            line-height: 1.1;
+        }
+
+        .resort-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(13px, 2.5vw, 18px);
+            font-style: italic;
+            color: rgba(232,204,130,0.7);
+            letter-spacing: 3px;
+            margin: 10px 0 0;
+        }
+
+        .menu-label {
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            letter-spacing: 5px;
+            color: var(--gold);
+            margin-top: 18px;
+            opacity: 0.8;
+        }
+
+        /* Diamond ornament */
+        .ornament {
+            color: var(--gold);
+            font-size: 18px;
+            letter-spacing: 12px;
+            margin: 8px 0;
+            opacity: 0.6;
+        }
+
+        /* MENU CARD */
+        .menu-card {
+            background: var(--warm-white);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow:
+                0 0 0 1px rgba(201,168,76,0.3),
+                0 0 0 4px rgba(201,168,76,0.08),
+                0 30px 80px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        /* Inner gold border */
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border: 1px solid rgba(201,168,76,0.2);
+            pointer-events: none;
+            z-index: 10;
+            border-radius: 2px;
+        }
+
+        /* Section styling */
+        .menu-section {
+            padding: 36px 50px;
+            border-bottom: 1px solid rgba(201,168,76,0.15);
+            position: relative;
+        }
+
+        .menu-section:last-child { border-bottom: none; }
+
+        /* Section header */
+        .section-head {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .section-head::before, .section-head::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201,168,76,0.5));
+        }
+
+        .section-head::after {
+            background: linear-gradient(270deg, transparent, rgba(201,168,76,0.5));
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--gold);
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+
+        /* Sub-section label */
+        .sub-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 15px;
+            color: #8a6a3a;
+            margin: 20px 0 10px;
+            padding-left: 2px;
+        }
+
+        /* Grid layouts */
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 50px; }
+        .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px 40px; }
+
+        @media (max-width: 650px) {
+            .two-col, .three-col { grid-template-columns: 1fr; }
+            .menu-section { padding: 28px 24px; }
+            .cover { padding: 40px 20px 36px; }
+        }
+
+        /* Menu item row */
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 8px;
+            padding: 7px 0;
+            border-bottom: 1px dotted rgba(201,168,76,0.2);
+        }
+
+        .item-row:last-child { border-bottom: none; }
+
+        .item-name {
+            font-family: 'EB Garamond', serif;
+            font-size: 14px;
+            color: var(--ink);
+            line-height: 1.3;
+            flex: 1;
+        }
+
+        .item-note {
+            font-size: 11.5px;
+            color: #8a7060;
+            font-style: italic;
+            display: block;
+            margin-top: 1px;
+        }
+
+        .item-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--moss);
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+
+        /* Platter special styling */
+        .platter-block {
+            background: linear-gradient(135deg, #faf5e8 0%, #f5edd6 100%);
+            border: 1px solid rgba(201,168,76,0.3);
+            border-radius: 3px;
+            padding: 18px 20px;
+            margin-bottom: 16px;
+        }
+
+        .platter-block:last-child { margin-bottom: 0; }
+
+        .platter-name {
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            color: var(--bark);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .platter-badge {
+            font-family: 'Cinzel', serif;
+            font-size: 8px;
+            letter-spacing: 2px;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 2px 6px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .platter-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--moss);
+            float: right;
+        }
+
+        .platter-contents {
+            font-size: 12px;
+            color: #7a6045;
+            font-style: italic;
+            margin-top: 8px;
+            line-height: 1.6;
+        }
+
+        /* Hero platter */
+        .platter-hero {
+            background: linear-gradient(135deg, var(--bark) 0%, #1a1005 100%);
+            border-color: var(--gold);
+            border-width: 1px;
+        }
+
+        .platter-hero .platter-name { color: var(--gold-light); }
+        .platter-hero .platter-price { color: var(--gold-light); }
+        .platter-hero .platter-contents { color: rgba(232,204,130,0.6); }
+        .platter-hero .platter-badge { color: var(--gold-light); border-color: var(--gold-light); }
+
+        /* Category badge for food types */
+        .category-chip {
+            display: inline-block;
+            background: var(--forest);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 8px;
+            letter-spacing: 2px;
+            padding: 3px 8px;
+            border-radius: 2px;
+            margin-bottom: 12px;
+        }
+
+        /* Footer */
+        .menu-footer {
+            padding: 28px 50px;
+            background: var(--forest);
+            text-align: center;
+        }
+
+        .footer-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 12px;
+            color: rgba(201,168,76,0.5);
+            letter-spacing: 1px;
+            line-height: 1.8;
+        }
+
+        /* Spirits category group */
+        .spirits-group { margin-bottom: 22px; }
+        .spirits-group:last-child { margin-bottom: 0; }
+
+        /* Animate on load */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .menu-section {
+            animation: fadeUp 0.5s ease both;
+        }
+        .menu-section:nth-child(1) { animation-delay: 0.05s; }
+        .menu-section:nth-child(2) { animation-delay: 0.1s; }
+        .menu-section:nth-child(3) { animation-delay: 0.15s; }
+        .menu-section:nth-child(4) { animation-delay: 0.2s; }
+
+        /* Print styles */
+        @media print {
+            body { background: white; }
+            body::before { display: none; }
+            .cover { padding: 30px 20px; }
+            .resort-name { color: #b8860b; text-shadow: none; }
+            .page-wrapper { padding: 0; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- Cover -->
+    <div class="cover">
+        <div class="ornament">◆ ◇ ◆</div>
+        <div class="resort-name">BROOKLYN PEARL<br>RESORT</div>
+        <div class="resort-subtitle">Fine Dining &nbsp;·&nbsp; Premium Spirits &nbsp;·&nbsp; Exceptional Service</div>
+        <div class="menu-label">✦ &nbsp; COMPLETE MENU &nbsp; ✦</div>
+        <div class="ornament" style="margin-top:16px;">◆ ◇ ◆</div>
+    </div>
+
+    <!-- Menu Card -->
+    <div class="menu-card">
+
+        <!-- CHICKEN -->
+        <div class="menu-section">
+            <div class="section-head"><span class="section-title">Chicken Dishes</span></div>
+            <div class="two-col">
+                <div>
+                    <div class="item-row"><span class="item-name">Chips Kuku</span><span class="item-price">KES 550</span></div>
+                    <div class="item-row"><span class="item-name">Chicken Wet Fry ¼kg</span><span class="item-price">KES 450</span></div>
+                    <div class="item-row"><span class="item-name">Chicken Wet Fry ½kg</span><span class="item-price">KES 900</span></div>
+                    <div class="item-row"><span class="item-name">Chicken Wet Fry 1kg</span><span class="item-price">KES 1,800</span></div>
+                    <div class="item-row"><span class="item-name">Chicken Dry Fry ¼kg</span><span class="item-price">KES 450</span></div>
+                    <div class="item-row"><span class="item-name">Chicken Dry Fry ½kg</span><span class="item-price">KES 900</span></div>
+                    <div class="item-row"><span class="item-name">Chicken Dry Fry 1kg</span><span class="item-price">KES 1,800</span></div>
+                </div>
+                <div>
+                    <div class="item-row"><span class="item-name">Kienyeji Wet Fry ½kg</span><span class="item-price">KES 1,000</span></div>
+                    <div class="item-row"><span class="item-name">Kienyeji Dry Fry ½kg</span><span class="item-price">KES 1,000</span></div>
+                    <div class="item-row"><span class="item-name">Kienyeji Wet Fry 1kg</span><span class="item-price">KES 2,000</span></div>
+                    <div class="item-row"><span class="item-name">Kienyeji Dry Fry 1kg</span><span class="item-price">KES 2,000</span></div>
+                    <div class="item-row"><span class="item-name">Chicken Lollipop</span><span class="item-price">KES 300</span></div>
+                    <div class="item-row"><span class="item-name">Chicken Curry</span><span class="item-price">KES 450</span></div>
+                    <div class="item-row"><span class="item-name">Kuku Bahati</span><span class="item-price">KES 2,400</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GOAT / BEEF / PORK -->
+        <div class="menu-section">
+            <div class="two-col">
+                <div>
+                    <div class="section-head" style="margin-bottom:16px;"><span class="section-title">Goat (Mbuzi)</span></div>
+                    <div class="item-row"><span class="item-name">Mbuzi Dry Fry ½kg</span><span class="item-price">KES 900</span></div>
+                    <div class="item-row"><span class="item-name">Mbuzi Dry Fry 1kg</span><span class="item-price">KES 1,800</span></div>
+                    <div class="item-row"><span class="item-name">Mbuzi Wet Fry ½kg</span><span class="item-price">KES 900</span></div>
+                    <div class="item-row"><span class="item-name">Mbuzi Wet Fry 1kg</span><span class="item-price">KES 1,800</span></div>
+                </div>
+                <div>
+                    <div class="section-head" style="margin-bottom:16px;"><span class="section-title">Beef Dishes</span></div>
+                    <div class="item-row"><span class="item-name">Beef Dry Fry ¼kg</span><span class="item-price">KES 400</span></div>
+                    <div class="item-row"><span class="item-name">Beef Wet Fry ¼kg</span><span class="item-price">KES 400</span></div>
+                    <div class="item-row"><span class="item-name">Beef Dry Fry ½kg</span><span class="item-price">KES 800</span></div>
+                    <div class="item-row"><span class="item-name">Beef Wet Fry ½kg</span><span class="item-price">KES 800</span></div>
+                    <div class="item-row"><span class="item-name">Beef Dry Fry 1kg</span><span class="item-price">KES 1,600</span></div>
+                    <div class="item-row"><span class="item-name">Beef Wet Fry 1kg</span><span class="item-price">KES 1,600</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PORK -->
+        <div class="menu-section">
+            <div class="section-head"><span class="section-title">Pork Dishes</span></div>
+            <div class="two-col">
+                <div>
+                    <div class="item-row"><span class="item-name">Pork Dry Fry ½kg</span><span class="item-price">KES 700</span></div>
+                    <div class="item-row"><span class="item-name">Pork Wet Fry ½kg</span><span class="item-price">KES 700</span></div>
+                    <div class="item-row"><span class="item-name">Pork Dry Fry 1kg</span><span class="item-price">KES 1,400</span></div>
+                </div>
+                <div>
+                    <div class="item-row"><span class="item-name">Pork Wet Fry 1kg</span><span class="item-price">KES 1,400</span></div>
+                    <div class="item-row"><span class="item-name">Honey Glazed Pork Ribs</span><span class="item-price">KES 1,000</span></div>
+                    <div class="item-row"><span class="item-name">Sweet & Sour Pork 1kg</span><span class="item-price">KES 1,600</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VEGETARIAN + KIDS -->
+        <div class="menu-section">
+            <div class="two-col">
+                <div>
+                    <div class="section-head" style="margin-bottom:16px;"><span class="section-title">Vegetarian</span></div>
+                    <div class="item-row"><span class="item-name">Vegetable Rice</span><span class="item-price">KES 200</span></div>
+                    <div class="item-row"><span class="item-name">Fruit Salad</span><span class="item-price">KES 300</span></div>
+                    <div class="item-row"><span class="item-name">Mokimo</span><span class="item-price">KES 200</span></div>
+                </div>
+                <div>
+                    <div class="section-head" style="margin-bottom:16px;"><span class="section-title">Kids Corner</span></div>
+                    <div class="item-row"><span class="item-name">Chicken Lollipop</span><span class="item-price">KES 500</span></div>
+                    <div class="item-row"><span class="item-name">Chips</span><span class="item-price">KES 150</span></div>
+                    <div class="item-row"><span class="item-name">Honey Glazed Pork Ribs</span><span class="item-price">KES 1,000</span></div>
+                    <div class="item-row"><span class="item-name">Sweet & Sour Pork 1kg</span><span class="item-price">KES 1,600</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BREAKFAST & SNACKS -->
+        <div class="menu-section">
+            <div class="section-head"><span class="section-title">Breakfast & Snacks</span></div>
+            <div class="sub-label">Combo Breakfast</div>
+            <div class="item-row" style="margin-bottom:16px;">
+                <span class="item-name">Sausage, Bacon, Bread & Tea<span class="item-note">Chef's morning combo</span></span>
+                <span class="item-price">KES 600</span>
+            </div>
+            <div class="sub-label">À La Carte</div>
+            <div class="two-col">
+                <div>
+                    <div class="item-row"><span class="item-name">Nduma</span><span class="item-price">KES 100</span></div>
+                    <div class="item-row"><span class="item-name">Plantain</span><span class="item-price">KES 150</span></div>
+                    <div class="item-row"><span class="item-name">Rolex</span><span class="item-price">KES 200</span></div>
+                    <div class="item-row"><span class="item-name">Plain Toast</span><span class="item-price">KES 50</span></div>
+                    <div class="item-row"><span class="item-name">Spanish Omelette</span><span class="item-price">KES 150</span></div>
+                    <div class="item-row"><span class="item-name">Fried Egg</span><span class="item-price">KES 100</span></div>
+                    <div class="item-row"><span class="item-name">Sausage Special</span><span class="item-price">KES 200</span></div>
+                    <div class="item-row"><span class="item-name">Sausage</span><span class="item-price">KES 70</span></div>
+                    <div class="item-row"><span class="item-name">Sweet Masala Chips</span><span class="item-price">KES 200</span></div>
+                    <div class="item-row"><span class="item-name">Spaghetti & Meatballs</span><span class="item-price">KES 600</span></div>
+                </div>
+                <div>
+                    <div class="item-row"><span class="item-name">Fluffy Pancake</span><span class="item-price">KES 100</span></div>
+                    <div class="item-row"><span class="item-name">Sweet Potato</span><span class="item-price">KES 100</span></div>
+                    <div class="item-row"><span class="item-name">French Toast</span><span class="item-price">KES 100</span></div>
+                    <div class="item-row"><span class="item-name">Sunny Side-Up</span><span class="item-price">KES 100</span></div>
+                    <div class="item-row"><span class="item-name">Plain Omelette</span><span class="item-price">KES 100</span></div>
+                    <div class="item-row"><span class="item-name">Poached Egg</span><span class="item-price">KES 100</span></div>
+                    <div class="item-row"><span class="item-name">Sausage Special 1</span><span class="item-price">KES 150</span></div>
+                    <div class="item-row"><span class="item-name">Bhajia</span><span class="item-price">KES 250</span></div>
+                    <div class="item-row"><span class="item-name">Choma Sausage</span><span class="item-price">KES 100</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIGNATURE PLATTERS -->
+        <div class="menu-section" style="background: linear-gradient(180deg, #faf7f0 0%, #f7f2e5 100%);">
+            <div class="section-head"><span class="section-title">Brooklyn Signature Platters</span></div>
+
+            <div class="platter-block platter-hero">
+                <div>
+                    <span class="platter-name">Brooklyn Family Platter <span class="platter-badge">FAMILY FEAST</span></span>
+                    <span class="platter-price">KES 10,000</span>
+                </div>
+                <div class="platter-contents">Beef 1kg · Sweet & Sour Pork 1kg · Whole Chicken · Pilau (2 portions) · Chapati (4 pcs) · Chips (2 portions) · Kachumbari · Choma Sausage (2 pcs) · Mbuzi 1kg · Green Maize · Pork Ribs (1 portion)</div>
+            </div>
+
+            <div class="two-col">
+                <div>
+                    <div class="platter-block">
+                        <div>
+                            <span class="platter-name">Brooklyn Semi Platter</span>
+                            <span class="platter-price">KES 2,500</span>
+                        </div>
+                        <div class="platter-contents">Beef ½kg · Chicken ½kg · Vegetable Rice (2 portions) · Kachumbari · Chapati (2 pcs)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="platter-block">
+                        <div>
+                            <span class="platter-name">Brooklyn Delight Platter</span>
+                            <span class="platter-price">KES 2,500</span>
+                        </div>
+                        <div class="platter-contents">Mbuzi ½kg · Chicken ½kg · Chips (1 portion) · Pilau (1 portion) · Kachumbari · Chapati (2 pcs)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="platter-block" style="margin-bottom:0;">
+                <div>
+                    <span class="platter-name">Brooklyn Duo Platter</span>
+                    <span class="platter-price">KES 3,000</span>
+                </div>
+                <div class="platter-contents">Chicken Nuggets (1 portion) · Mbuzi ½kg · Potato Wedges (1 portion) · Kachumbari</div>
+            </div>
+        </div>
+
+        <!-- BEVERAGES: HOT & SOFT -->
+        <div class="menu-section">
+            <div class="two-col">
+                <div>
+                    <div class="section-head" style="margin-bottom:16px;"><span class="section-title">Hot Beverages</span></div>
+                    <div class="item-row"><span class="item-name">African Tea</span><span class="item-price">KES 100</span></div>
+                    <div class="item-row"><span class="item-name">Masala Tea</span><span class="item-price">KES 150</span></div>
+                    <div class="item-row"><span class="item-name">Black Tea</span><span class="item-price">KES 100</span></div>
+                    <div class="item-row"><span class="item-name">Lemon Tea</span><span class="item-price">KES 150</span></div>
+                    <div class="item-row"><span class="item-name">Ginger Tea</span><span class="item-price">KES 150</span></div>
+                    <div class="item-row"><span class="item-name">Dawa</span><span class="item-price">KES 150</span></div>
+                    <div class="item-row"><span class="item-name">Black Coffee</span><span class="item-price">KES 100</span></div>
+                    <div class="item-row"><span class="item-name">White Coffee</span><span class="item-price">KES 150</span></div>
+                    <div class="item-row"><span class="item-name">Milo</span><span class="item-price">KES 150</span></div>
+                    <div class="item-row"><span class="item-name">White Chocolate</span><span class="item-price">KES 150</span></div>
+                    <div class="item-row"><span class="item-name">Black Chocolate</span><span class="item-price">KES 100</span></div>
+                    <div class="item-row"><span class="item-name">Wimbi Porridge</span><span class="item-price">KES 150</span></div>
+                    <div class="item-row"><span class="item-name">Uji Power</span><span class="item-price">KES 250</span></div>
+                </div>
+                <div>
+                    <div class="section-head" style="margin-bottom:16px;"><span class="section-title">Soft Drinks & Water</span></div>
+                    <div class="item-row"><span class="item-name">Soda</span><span class="item-price">KES 100</span></div>
+                    <div class="item-row"><span class="item-name">Novida</span><span class="item-price">KES 100</span></div>
+                    <div class="item-row"><span class="item-name">Keringet Water</span><span class="item-price">KES 150</span></div>
+                    <div class="item-row"><span class="item-name">Mineral Water 1L</span><span class="item-price">KES 100</span></div>
+                    <div class="item-row"><span class="item-name">Dasani Water</span><span class="item-price">KES 120</span></div>
+                    <div class="item-row"><span class="item-name">Delmonte</span><span class="item-price">KES 400</span></div>
+                    <div class="item-row"><span class="item-name">Monster</span><span class="item-price">KES 300</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SPIRITS -->
+        <div class="menu-section">
+            <div class="section-head"><span class="section-title">Premium Spirits & Whisky</span></div>
+            <div class="two-col">
+                <div>
+                    <div class="spirits-group">
+                        <div class="sub-label">Whiskies</div>
+                        <div class="item-row"><span class="item-name">Jack Daniel's</span><span class="item-price">KES 5,000</span></div>
+                        <div class="item-row"><span class="item-name">Jack Daniel's Honey</span><span class="item-price">KES 5,000</span></div>
+                        <div class="item-row"><span class="item-name">Jameson</span><span class="item-price">KES 5,000</span></div>
+                        <div class="item-row"><span class="item-name">Chivas Regal</span><span class="item-price">KES 5,500</span></div>
+                        <div class="item-row"><span class="item-name">Ballantine's</span><span class="item-price">KES 4,000</span></div>
+                        <div class="item-row"><span class="item-name">JW Gold Reserve</span><span class="item-price">KES 11,000</span></div>
+                        <div class="item-row"><span class="item-name">JW Double Black 1L</span><span class="item-price">KES 8,800</span></div>
+                        <div class="item-row"><span class="item-name">JW Double Black 750ml</span><span class="item-price">KES 6,000</span></div>
+                        <div class="item-row"><span class="item-name">JW Black 750ml</span><span class="item-price">KES 5,000</span></div>
+                        <div class="item-row"><span class="item-name">JW Red 750ml</span><span class="item-price">KES 3,000</span></div>
+                        <div class="item-row"><span class="item-name">JW Red Label 1L</span><span class="item-price">KES 6,000</span></div>
+                        <div class="item-row"><span class="item-name">Singleton Dufftown 15Y</span><span class="item-price">KES 12,000</span></div>
+                        <div class="item-row"><span class="item-name">Singleton Dufftown 12Y</span><span class="item-price">KES 8,000</span></div>
+                        <div class="item-row"><span class="item-name">Black & White 750ml</span><span class="item-price">KES 2,000</span></div>
+                        <div class="item-row"><span class="item-name">JB Rare</span><span class="item-price">KES 2,800</span></div>
+                        <div class="item-row"><span class="item-name">VAT 69 750ml</span><span class="item-price">KES 2,200</span></div>
+                        <div class="item-row"><span class="item-name">VAT 69 350ml</span><span class="item-price">KES 1,200</span></div>
+                        <div class="item-row"><span class="item-name">Grants 750ml</span><span class="item-price">KES 2,800</span></div>
+                        <div class="item-row"><span class="item-name">Grants 1L</span><span class="item-price">KES 3,500</span></div>
+                        <div class="item-row"><span class="item-name">Bond 7 750ml</span><span class="item-price">KES 1,800</span></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="spirits-group">
+                        <div class="sub-label">Brandy & Cognac</div>
+                        <div class="item-row"><span class="item-name">Hennessy Cognac 750ml</span><span class="item-price">KES 9,000</span></div>
+                        <div class="item-row"><span class="item-name">Viceroy</span><span class="item-price">KES 2,300</span></div>
+                        <div class="item-row"><span class="item-name">Richot 750ml</span><span class="item-price">KES 2,000</span></div>
+                    </div>
+                    <div class="spirits-group">
+                        <div class="sub-label">Gin & Vodka</div>
+                        <div class="item-row"><span class="item-name">Gilbeys 750ml</span><span class="item-price">KES 2,500</span></div>
+                        <div class="item-row"><span class="item-name">Gordons Gin 750ml</span><span class="item-price">KES 2,800</span></div>
+                        <div class="item-row"><span class="item-name">Gordons Pink Gin 700ml</span><span class="item-price">KES 3,000</span></div>
+                        <div class="item-row"><span class="item-name">Chrome Vodka 750ml</span><span class="item-price">KES 584</span></div>
+                        <div class="item-row"><span class="item-name">Smirnoff Red 750ml</span><span class="item-price">KES 2,000</span></div>
+                        <div class="item-row"><span class="item-name">Tang London Gin 75cl</span><span class="item-price">KES 4,000</span></div>
+                    </div>
+                    <div class="spirits-group">
+                        <div class="sub-label">Rum & Liqueurs</div>
+                        <div class="item-row"><span class="item-name">Captain Morgan Gold 750ml</span><span class="item-price">KES 1,600</span></div>
+                        <div class="item-row"><span class="item-name">KC Pineapple 750ml</span><span class="item-price">KES 1,300</span></div>
+                        <div class="item-row"><span class="item-name">KC Lemon & Ginger 750ml</span><span class="item-price">KES 1,100</span></div>
+                        <div class="item-row"><span class="item-name">KC Smooth 750ml</span><span class="item-price">KES 1,300</span></div>
+                        <div class="item-row"><span class="item-name">KC Smooth 350ml</span><span class="item-price">KES 600</span></div>
+                        <div class="item-row"><span class="item-name">Baileys 750ml</span><span class="item-price">KES 3,500</span></div>
+                        <div class="item-row"><span class="item-name">Amarula</span><span class="item-price">KES 3,300</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BEERS & CIDERS -->
+        <div class="menu-section">
+            <div class="section-head"><span class="section-title">Beers & Ciders</span></div>
+            <div class="two-col">
+                <div>
+                    <div class="item-row"><span class="item-name">Tusker Lager 500ml</span><span class="item-price">KES 300</span></div>
+                    <div class="item-row"><span class="item-name">Tusker Lite 330ml</span><span class="item-price">KES 300</span></div>
+                    <div class="item-row"><span class="item-name">Tusker Malt 330ml</span><span class="item-price">KES 300</span></div>
+                    <div class="item-row"><span class="item-name">Tusker Cider 500ml</span><span class="item-price">KES 350</span></div>
+                    <div class="item-row"><span class="item-name">White Cap Lager</span><span class="item-price">KES 300</span></div>
+                    <div class="item-row"><span class="item-name">White Cap Can</span><span class="item-price">KES 320</span></div>
+                    <div class="item-row"><span class="item-name">Balozi Lager 500ml</span><span class="item-price">KES 300</span></div>
+                    <div class="item-row"><span class="item-name">Heineken</span><span class="item-price">KES 370</span></div>
+                    <div class="item-row"><span class="item-name">Guinness</span><span class="item-price">KES 300</span></div>
+                    <div class="item-row"><span class="item-name">Manyatta Can</span><span class="item-price">KES 400</span></div>
+                    <div class="item-row"><span class="item-name">Manyatta Pineapple & Mint</span><span class="item-price">KES 350</span></div>
+                    <div class="item-row"><span class="item-name">Snapp Apple Can</span><span class="item-price">KES 300</span></div>
+                </div>
+                <div>
+                    <div class="item-row"><span class="item-name">Hunters Dry Cider</span><span class="item-price">KES 350</span></div>
+                    <div class="item-row"><span class="item-name">Hunters Gold 330ml</span><span class="item-price">KES 350</span></div>
+                    <div class="item-row"><span class="item-name">Savannah Cider</span><span class="item-price">KES 350</span></div>
+                    <div class="item-row"><span class="item-name">Savannah Angry Lemon</span><span class="item-price">KES 350</span></div>
+                    <div class="item-row"><span class="item-name">Smirnoff Ice Black 300ml</span><span class="item-price">KES 300</span></div>
+                    <div class="item-row"><span class="item-name">Gordons Dry Tonic Can</span><span class="item-price">KES 300</span></div>
+                    <div class="item-row"><span class="item-name">Gordons Pink & Tonic Can</span><span class="item-price">KES 300</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WINES -->
+        <div class="menu-section">
+            <div class="section-head"><span class="section-title">Wines</span></div>
+            <div class="two-col">
+                <div>
+                    <div class="item-row"><span class="item-name">Drostdyhof White</span><span class="item-price">KES 1,800</span></div>
+                    <div class="item-row"><span class="item-name">Drostdyhof Grand Premier</span><span class="item-price">KES 1,800</span></div>
+                    <div class="item-row"><span class="item-name">Drostdyhof Dry-Red</span><span class="item-price">KES 1,800</span></div>
+                    <div class="item-row"><span class="item-name">Four Cousins White / Sweet Red</span><span class="item-price">KES 1,600</span></div>
+                    <div class="item-row"><span class="item-name">4th Street Sweet White / Red</span><span class="item-price">KES 1,500</span></div>
+                    <div class="item-row"><span class="item-name">Nedenberg Chardonnay / Shiraz</span><span class="item-price">KES 2,500</span></div>
+                </div>
+                <div>
+                    <div class="item-row"><span class="item-name">Cellar Cask White / Red</span><span class="item-price">KES 1,600</span></div>
+                    <div class="item-row"><span class="item-name">Caprice Dry / Sweet Red & White</span><span class="item-price">KES 1,600</span></div>
+                    <div class="item-row"><span class="item-name">Casa Buena White / Red</span><span class="item-price">KES 1,200</span></div>
+                    <div class="item-row"><span class="item-name">Chamdor</span><span class="item-price">KES 1,400</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer inside card -->
+        <div class="menu-footer">
+            <div class="ornament" style="color:rgba(201,168,76,0.4); margin-bottom:12px;">◆ ◇ ◆</div>
+            <p class="footer-text">All prices are in Kenyan Shillings (KES) and include VAT</p>
+            <p class="footer-text">Service charge not included · Please enjoy responsibly</p>
+            <p class="footer-text" style="margin-top:8px; color:rgba(201,168,76,0.3);">━━━ BROOKLYN PEARL RESORT ━━━</p>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
